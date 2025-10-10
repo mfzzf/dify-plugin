@@ -3,7 +3,7 @@ name: Auto Create PR on Main Push
 
 on:
   push:
-    branches: [ main ]  # Trigger on push to main
+    branches: [main] # Trigger on push to main
 
 jobs:
   create_pr: # Renamed job for clarity
@@ -73,7 +73,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           # Use author variable for repository
-          repository: ${{steps.get_basic_info.outputs.author}}/dify-plugins
+          repository: GYMmaorui/dify-plugins
           path: dify-plugins
           token: ${{ secrets.PLUGIN_ACTION }}
           fetch-depth: 1 # Fetch only the last commit to speed up checkout
@@ -128,7 +128,7 @@ jobs:
         run: |
           gh pr create \
             --repo langgenius/dify-plugins \
-            --head "${{ steps.get_basic_info.outputs.author }}:${{ steps.get_basic_info.outputs.plugin_name }}-${{ steps.get_basic_info.outputs.version }}" \
+            --head "GYMmaorui:bump-${{ steps.get_basic_info.outputs.plugin_name }}-${{ steps.get_basic_info.outputs.version }}" \
             --base main \
             --title "bump ${{ steps.get_basic_info.outputs.plugin_name }} plugin to version ${{ steps.get_basic_info.outputs.version }}" \
             --body "bump ${{ steps.get_basic_info.outputs.plugin_name }} plugin package to version ${{ steps.get_basic_info.outputs.version }}
